@@ -61,8 +61,8 @@ def main(database):
         ##ax.add_patch(rect)
 
     names = {}
-    database["Unknown Counter"]=0
-    unknown_counter = database["Unknown Counter"]
+    ##database["Unknown Counter"]=0
+    ##unknown_counter = database["Unknown Counter"]
 
     for face in detections:
         # let's take a look as to what the descriptor is!!
@@ -70,14 +70,14 @@ def main(database):
         descriptor = np.array(face_rec_model.compute_face_descriptor(pic, shape))
 
         # compares descriptor to database through img_in_database
-        cutoff = .4
+        cutoff = .35
         #print("DATABASE")
         #print(database)
         name = match.img_in_database(descriptor, database, cutoff)
 
         if name == "not found":
-            name = "Unknown" + str(unknown_counter)
-            database["Unknown Counter"] += 1
+            name = "Unknown" #+ str(unknown_counter)
+            ##database["Unknown Counter"] += 1
 
         # plots name underneath square
         ##ax.text(face.left()+(0.25*faces.width()), face.bottom()+(0.2*faces.height()), name, bbox=dict(facecolor='green', alpha=0.5))
@@ -96,7 +96,7 @@ def main(database):
                 database = portfolio.update_profile(names[name], name, database)
             else:
                 return ("Unknown",descreturn)
-                # add_name = input(f"Would you like to give a name for {name}? [y/n]  ")
+                ##add_name = input(f"Would you like to give a name for {name}? [y/n]  ")
                 # if add_name == "y":
                 #     new_name = input(f"What is {name}'s name?   ")
                 #     if new_name in database:
