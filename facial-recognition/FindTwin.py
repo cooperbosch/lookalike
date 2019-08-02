@@ -28,7 +28,7 @@ with open("image_arrays.pkl", mode="rb") as opened_file:
 with open("database.pkl", mode="rb") as opened_file:
     database = pickle.load(opened_file)
     #print(database["Alex"])
-    print([k for k in database])
+    #print([k for k in database])
 desc=None
 dbname=None
 
@@ -50,12 +50,11 @@ def yes_intent():
     global desc
     global dbname
     name, desc = main(database)
-    print("Desc",desc.shape )
+    #print("Desc",desc.shape )
     if "Unknown" not in name:
         face_msg = 'Hello {}'.format(name)
         dbname=name
-        ###update profile?
-        return question(face_msg+". Do you want to see your celebrity look alike? Say 'Who do I look like?'")
+        return question(face_msg+". Say 'Who do I look like' to see your celebrity look-alike!")
     else:
         return question("What is your name?")
 
@@ -79,7 +78,7 @@ def assign_name(name,uk,german,cogworks):
     #print(name,uk,german,cogworks)
     database = portfolio.create_profile(desc, dbname, database)
     face_msg = 'Hello {}'.format(dbname)
-    return question(face_msg + ". Do you want to see your celebrity look alike? Say 'Who do I look like?'")
+    return question(face_msg + ". Say 'Who do I look like' to see your celebrity look-alike!")
 
 @ask.intent("TwinIntent")
 def twin_intent():
